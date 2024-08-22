@@ -1,0 +1,1573 @@
+[
+    {
+        "id": "903baa515f965384",
+        "type": "inject",
+        "z": "88790199e22dcb8f",
+        "d": true,
+        "name": "Hvert 5 min",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "310",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "60",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 1025,
+        "wires": [
+            [
+                "66f7c7cf8615f0ef"
+            ]
+        ]
+    },
+    {
+        "id": "bf10873b265e3d58",
+        "type": "change",
+        "z": "88790199e22dcb8f",
+        "name": "Gem Danfoss data",
+        "rules": [
+            {
+                "t": "set",
+                "p": "danfoss_data",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 1025,
+        "wires": [
+            [
+                "973f80934443cc8b"
+            ]
+        ]
+    },
+    {
+        "id": "973f80934443cc8b",
+        "type": "function",
+        "z": "88790199e22dcb8f",
+        "name": "Index data",
+        "func": "let danfoss_data = flow.get(\"danfoss_data\");\nlet data= {};\n\n\ndanfoss_data.forEach(function(item, index) {\n  data[item.topic] = item.payload.temperature.value\n    \n});\n\ndanfoss_data.forEach(function (item, index) {\n  data[\"Setpoint \"+item.topic] = item.payload.targetSetpoint.value\n\n});\n\n\nmsg.payload = data\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 585,
+        "y": 1125,
+        "wires": [
+            [
+                "798e843060e75cf0",
+                "49b7df48ad7b5758",
+                "0f9d64a7c39c3b76"
+            ]
+        ]
+    },
+    {
+        "id": "4fe202683cc71982",
+        "type": "inject",
+        "z": "88790199e22dcb8f",
+        "d": true,
+        "name": "Skub Data til HA fra flow.",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "12",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 360,
+        "y": 1125,
+        "wires": [
+            [
+                "973f80934443cc8b"
+            ]
+        ]
+    },
+    {
+        "id": "0f9d64a7c39c3b76",
+        "type": "debug",
+        "z": "88790199e22dcb8f",
+        "name": "debug 111",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "6d11655ecacfa16f",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Soveværelse",
+        "entityConfig": "e9d122518b5535c8",
+        "version": 0,
+        "state": "payload.Soveværelse",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 420,
+        "y": 1300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c9ab8521afc43250",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Køkken",
+        "entityConfig": "2f75b77ca6720b22",
+        "version": 0,
+        "state": "payload.Køkken",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 410,
+        "y": 1350,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7056196390f1dc37",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Setpoint Køkken",
+        "entityConfig": "0714e0305355a43f",
+        "version": 0,
+        "state": "payload[\"Setpoint Køkken\"]",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 700,
+        "y": 1350,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "19ee63b0a40fafa5",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Setpoint Soveværelse",
+        "entityConfig": "1ed8728f1f4905da",
+        "version": 0,
+        "state": "payload[\"Setpoint Soveværelse\"]",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 720,
+        "y": 1300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "66f7c7cf8615f0ef",
+        "type": "alexa-remote-smarthome",
+        "z": "88790199e22dcb8f",
+        "name": "Hent Danfoss Link Info fra Alexa",
+        "account": "f151eaec534cafb7",
+        "config": {
+            "option": "query",
+            "value": [
+                {
+                    "entity": "f025c72f-f8f0-4b32-9a8c-0a43d916ab2e",
+                    "property": "all"
+                },
+                {
+                    "entity": "52948e9f-0335-4f30-9cd9-97092ed57505",
+                    "property": "all"
+                },
+                {
+                    "entity": "9a79ad6d-df37-49d1-923b-da952db641f6",
+                    "property": "all"
+                },
+                {
+                    "entity": "3109f77d-e3bb-4b79-9899-12875724f52c",
+                    "property": "all"
+                },
+                {
+                    "entity": "c0d83a74-4cf1-4c5e-a515-2fe412ab7cf4",
+                    "property": "all"
+                },
+                {
+                    "entity": "2d6eb5a9-46f6-486b-ac8e-b9ed2451ae73",
+                    "property": "all"
+                },
+                {
+                    "entity": "68ac9c01-59e0-4048-bb1d-f0b5ec6dfda5",
+                    "property": "all"
+                },
+                {
+                    "entity": "832089b3-4113-4bd4-bd5e-d6619d73f62a",
+                    "property": "all"
+                }
+            ]
+        },
+        "outputs": 1,
+        "x": 555,
+        "y": 1025,
+        "wires": [
+            [
+                "bf10873b265e3d58",
+                "92e411757ee2147a"
+            ]
+        ]
+    },
+    {
+        "id": "92e411757ee2147a",
+        "type": "debug",
+        "z": "88790199e22dcb8f",
+        "name": "debug 112",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "798e843060e75cf0",
+        "type": "change",
+        "z": "88790199e22dcb8f",
+        "name": "Set Flow",
+        "rules": [
+            {
+                "t": "set",
+                "p": "bad",
+                "pt": "flow",
+                "to": "payload[\"Setpoint Badeværelse\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "1sal",
+                "pt": "flow",
+                "to": "payload[\"Setpoint Gang 1sal\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "kontor",
+                "pt": "flow",
+                "to": "payload[\"Setpoint Kontor\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "kokken",
+                "pt": "flow",
+                "to": "payload[\"Setpoint Køkken\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "noah",
+                "pt": "flow",
+                "to": "payload[\"Setpoint Noah\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "stue",
+                "pt": "flow",
+                "to": "payload[\"Setpoint Stue\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "vaerelse2",
+                "pt": "flow",
+                "to": "payload[\"Setpoint Værelse 2\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "sove",
+                "pt": "flow",
+                "to": "payload[\"Setpoint Soveværelse\"]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 1125,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6af4d3a7f38fabc4",
+        "type": "comment",
+        "z": "88790199e22dcb8f",
+        "name": "flow.sove",
+        "info": "",
+        "x": 910,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "9223a10eaf983192",
+        "type": "comment",
+        "z": "88790199e22dcb8f",
+        "name": "flow.kokken",
+        "info": "",
+        "x": 920,
+        "y": 1350,
+        "wires": []
+    },
+    {
+        "id": "49b7df48ad7b5758",
+        "type": "link out",
+        "z": "88790199e22dcb8f",
+        "name": "Send til export",
+        "mode": "link",
+        "links": [
+            "5b0caef6448e5a31",
+            "921bb53440c304aa"
+        ],
+        "x": 765,
+        "y": 1175,
+        "wires": []
+    },
+    {
+        "id": "87f0e9660a1e873e",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Stue",
+        "entityConfig": "35fdb7d9699654d7",
+        "version": 0,
+        "state": "payload.Stue",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 400,
+        "y": 1250,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d6af7d02d4bdf2ef",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Setpoint Stue",
+        "entityConfig": "64af40c0085eefdf",
+        "version": 0,
+        "state": "payload[\"Setpoint Stue\"]",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 700,
+        "y": 1250,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "36f3892d4063f51f",
+        "type": "comment",
+        "z": "88790199e22dcb8f",
+        "name": "flow.stue",
+        "info": "",
+        "x": 910,
+        "y": 1250,
+        "wires": []
+    },
+    {
+        "id": "5b0caef6448e5a31",
+        "type": "link in",
+        "z": "88790199e22dcb8f",
+        "name": "Modtag til Temperatur",
+        "links": [
+            "49b7df48ad7b5758"
+        ],
+        "x": 265,
+        "y": 1250,
+        "wires": [
+            [
+                "87f0e9660a1e873e",
+                "6d11655ecacfa16f",
+                "c9ab8521afc43250",
+                "e08053f575724acb",
+                "45de3085c6548583",
+                "54de9cfea213ccf9",
+                "58a414e314544dfd",
+                "8ab4d4c23522c794"
+            ]
+        ]
+    },
+    {
+        "id": "921bb53440c304aa",
+        "type": "link in",
+        "z": "88790199e22dcb8f",
+        "name": "Modtag til Setpunkt",
+        "links": [
+            "49b7df48ad7b5758"
+        ],
+        "x": 535,
+        "y": 1250,
+        "wires": [
+            [
+                "d6af7d02d4bdf2ef",
+                "19ee63b0a40fafa5",
+                "7056196390f1dc37",
+                "a1d40196e5d746a4",
+                "ed28e2e017dddd88",
+                "5da874d859579545",
+                "ed72ef2f2126e70c",
+                "abdcb9088994cb9f"
+            ]
+        ]
+    },
+    {
+        "id": "58a414e314544dfd",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Noah",
+        "entityConfig": "ee16b5c1406126b7",
+        "version": 0,
+        "state": "payload.Noah",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 400,
+        "y": 1550,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e08053f575724acb",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Badeværelse",
+        "entityConfig": "b88110df8c98ad8e",
+        "version": 0,
+        "state": "payload[\"Badeværelse\"]",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 420,
+        "y": 1400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "45de3085c6548583",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Kontor",
+        "entityConfig": "14f7a918cf59ef08",
+        "version": 0,
+        "state": "payload.Kontor",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 400,
+        "y": 1450,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "54de9cfea213ccf9",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "1sal",
+        "entityConfig": "5db83830c2d6f04b",
+        "version": 0,
+        "state": "payload[\"Gang 1sal\"]",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 400,
+        "y": 1500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a1d40196e5d746a4",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Setpoint Badeværelse",
+        "entityConfig": "2d98e6d5142ed6a5",
+        "version": 0,
+        "state": "payload[\"Setpoint Badeværelse\"]",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 720,
+        "y": 1400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8ab4d4c23522c794",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Værelse2",
+        "entityConfig": "1972e8faf4be259b",
+        "version": 0,
+        "state": "payload[\"Værelse 2\"]",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 410,
+        "y": 1600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5da874d859579545",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Setpoint Gang 1sal",
+        "entityConfig": "a603a56d4694525e",
+        "version": 0,
+        "state": "payload[\"Setpoint Gang 1sal\"]",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 710,
+        "y": 1500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ed28e2e017dddd88",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Setpoint Kontor",
+        "entityConfig": "3b4c526b969aed7a",
+        "version": 0,
+        "state": "payload[\"Setpoint Kontor\"]",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 700,
+        "y": 1450,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ed72ef2f2126e70c",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Setpoint Noah",
+        "entityConfig": "1eeb898cdfda3741",
+        "version": 0,
+        "state": "payload[\"Setpoint Noah\"]",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 700,
+        "y": 1550,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "abdcb9088994cb9f",
+        "type": "ha-sensor",
+        "z": "88790199e22dcb8f",
+        "name": "Setpoint Værelse2",
+        "entityConfig": "bab7688634b5cdc6",
+        "version": 0,
+        "state": "payload[\"Setpoint Værelse 2\"]",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 710,
+        "y": 1600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "63712a840a31b507",
+        "type": "comment",
+        "z": "88790199e22dcb8f",
+        "name": "flow.noah",
+        "info": "",
+        "x": 910,
+        "y": 1550,
+        "wires": []
+    },
+    {
+        "id": "bbfca7b57063baaa",
+        "type": "comment",
+        "z": "88790199e22dcb8f",
+        "name": "flow.vaerelse2",
+        "info": "",
+        "x": 920,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "b7384111e865b3a2",
+        "type": "comment",
+        "z": "88790199e22dcb8f",
+        "name": "flow.kontor",
+        "info": "",
+        "x": 910,
+        "y": 1450,
+        "wires": []
+    },
+    {
+        "id": "362bbfc94df3506e",
+        "type": "comment",
+        "z": "88790199e22dcb8f",
+        "name": "flow.1sal",
+        "info": "",
+        "x": 910,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "9267cfc03318ebfc",
+        "type": "comment",
+        "z": "88790199e22dcb8f",
+        "name": "flow.bad",
+        "info": "",
+        "x": 910,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "11a1e9feec7a4ad7",
+        "type": "group",
+        "z": "88790199e22dcb8f",
+        "name": "Forbind til Alexa og hold forbindelsen.",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "345e6889c658af63",
+            "528837a0fea23627",
+            "903a03ae491354e6",
+            "7543b72f34e4d6df",
+            "b051f8d921f9d8ff",
+            "769262f3821b8129"
+        ],
+        "x": 254,
+        "y": 784,
+        "w": 647,
+        "h": 157,
+        "info": "Forbind til Alexa og hold forbindelsen over flere dage!\r\nhttps://github.com/michaelflarsen"
+    },
+    {
+        "id": "345e6889c658af63",
+        "type": "inject",
+        "z": "88790199e22dcb8f",
+        "d": true,
+        "g": "11a1e9feec7a4ad7",
+        "name": "Ny forspørgelse",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 380,
+        "y": 825,
+        "wires": [
+            [
+                "528837a0fea23627"
+            ]
+        ]
+    },
+    {
+        "id": "528837a0fea23627",
+        "type": "alexa-remote-init",
+        "z": "88790199e22dcb8f",
+        "g": "11a1e9feec7a4ad7",
+        "name": "",
+        "account": "f151eaec534cafb7",
+        "option": "fresh",
+        "x": 575,
+        "y": 825,
+        "wires": [
+            [
+                "903a03ae491354e6"
+            ]
+        ]
+    },
+    {
+        "id": "903a03ae491354e6",
+        "type": "change",
+        "z": "88790199e22dcb8f",
+        "g": "11a1e9feec7a4ad7",
+        "name": "Gem auth til flow",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alexa_auth",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 785,
+        "y": 825,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7543b72f34e4d6df",
+        "type": "change",
+        "z": "88790199e22dcb8f",
+        "g": "11a1e9feec7a4ad7",
+        "name": "Set auth fra flow",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "alexa_auth",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 900,
+        "wires": [
+            [
+                "769262f3821b8129"
+            ]
+        ]
+    },
+    {
+        "id": "b051f8d921f9d8ff",
+        "type": "inject",
+        "z": "88790199e22dcb8f",
+        "d": true,
+        "g": "11a1e9feec7a4ad7",
+        "name": "Start og Gentagelse",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "86400",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 400,
+        "y": 900,
+        "wires": [
+            [
+                "7543b72f34e4d6df"
+            ]
+        ]
+    },
+    {
+        "id": "769262f3821b8129",
+        "type": "alexa-remote-init",
+        "z": "88790199e22dcb8f",
+        "g": "11a1e9feec7a4ad7",
+        "name": "",
+        "account": "f151eaec534cafb7",
+        "option": "initialise",
+        "x": 790,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e9d122518b5535c8",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Danfoss_Soveværelse",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Soveværelse"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "2f75b77ca6720b22",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Køkken",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Køkken"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "0714e0305355a43f",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Setpoint Køkken",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Køkken_Setpoint"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "1ed8728f1f4905da",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Setpoint Soveværelse",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Soveværelse_Setpoint"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "f151eaec534cafb7",
+        "type": "alexa-remote-account",
+        "name": "",
+        "authMethod": "proxy",
+        "proxyOwnIp": "192.168.5.2",
+        "proxyPort": "3456",
+        "cookieFile": "alexa_authFile",
+        "refreshInterval": "3",
+        "alexaServiceHost": "pitangui.amazon.com",
+        "pushDispatchHost": "",
+        "amazonPage": "amazon.com",
+        "acceptLanguage": "en-US",
+        "onKeywordInLanguage": "on",
+        "userAgent": "",
+        "autoInit": "off"
+    },
+    {
+        "id": "35fdb7d9699654d7",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Danfoss_Stue",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Stue"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "64af40c0085eefdf",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Setpoint Stue",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Stue_Setpoint"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "ee16b5c1406126b7",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Noah",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Noah"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "b88110df8c98ad8e",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Badeværelse",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Badeværelse"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "14f7a918cf59ef08",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Kontor",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Kontor"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "5db83830c2d6f04b",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "1Sal",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_1Sal"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": true,
+        "debugEnabled": false
+    },
+    {
+        "id": "2d98e6d5142ed6a5",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Setpoint Badeværelse",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Badeværelse_Setpoint"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "1972e8faf4be259b",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Værelse2",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Værelse2"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "a603a56d4694525e",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Setpoint Gang 1sal",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Gang_1sal_Setpoint"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "3b4c526b969aed7a",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Setpoint Kontor",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Kontor_Setpoint"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "1eeb898cdfda3741",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Setpoint Noah",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Noah_Setpoint"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "bab7688634b5cdc6",
+        "type": "ha-entity-config",
+        "server": "6346c597.eb634c",
+        "deviceConfig": "42587efcbd71c3f7",
+        "name": "Setpoint Værelse 2",
+        "version": "6",
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Danfoss_Værelse2_Setpoint"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "°C"
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "6346c597.eb634c",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 5,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": "30",
+        "areaSelector": "friendlyName",
+        "deviceSelector": "friendlyName",
+        "entitySelector": "friendlyName",
+        "statusSeparator": "at: ",
+        "statusYear": "hidden",
+        "statusMonth": "short",
+        "statusDay": "numeric",
+        "statusHourCycle": "h23",
+        "statusTimeFormat": "h:m",
+        "enableGlobalContextStore": true
+    },
+    {
+        "id": "42587efcbd71c3f7",
+        "type": "ha-device-config",
+        "name": "Danfoss",
+        "hwVersion": "",
+        "manufacturer": "Node-RED",
+        "model": "",
+        "swVersion": ""
+    }
+]
