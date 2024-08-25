@@ -1,6 +1,6 @@
 # Danfoss Link CC In HomeAssistant
 <img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfosslink.JPG" alt="Controller" width="500">
-Følg disse trin hvis du vil ha dit gamle Danfoss Link CC system in i Home Assistant med mulighed for at styre temperature med automatiseringer og se statiktik!<br><br>
+Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home Assistant, med mulighed for at styre temperature via automatiseringer og se statiktik!<br><br>
 1. Tilføj din Danfoss Link til Alexa.
     <br>Hjælp: <a href="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfossAlexaSetup.pdf">Her</a> 
 
