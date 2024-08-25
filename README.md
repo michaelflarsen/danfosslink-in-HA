@@ -7,7 +7,8 @@ Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home As
 <i>Vi trækker info fra Danfoss Link igennem Alexa og til Node-Red, mange trin, mange fejl muligheder!!</i>
 <br><br>
 
-1. Tilføj din Danfoss Link CC til Alexa Appen, <i>kræver ingen Alexa Enheder</i><br> Man må kun trække data ud af Alexa hvert 5 min!
+1. Tilføj din Danfoss Link CC til Alexa Appen, <i>kræver ingen Alexa Enheder</i><br>
+   Man må kun trække data ud af Alexa hvert 5 min!
     <br>Hjælp: <a href="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfossAlexaSetup.pdf">Her</a> 
 
 2. Din <b>Node-Red</b> installation skal indholde disse 2 paletter (alt+shift+p).
@@ -17,11 +18,11 @@ Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home As
 3. Impoter flow fra denne fil: <a href="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/Node-Red%20Flow">Her fra</a><br>
     Tilføj det i din Node-Red installation
    
-5. Opsæt din Alexa web server under en enhed der har "Account missing!", den skal have din Node-Red's IP, og port 3456! <a href="https://raw.githubusercontent.com/michaelflarsen/danfosslink-in-HA/main/alexaServerIp.JPG">eksempel</a>
+4. Opsæt din Alexa web server under en enhed der har "Account missing!", den skal have din Node-Red's IP, og port 3456! <a href="https://raw.githubusercontent.com/michaelflarsen/danfosslink-in-HA/main/alexaServerIp.JPG">eksempel</a>
 
-6. Deploy dit flow og opsæt Noden "Hent Danfoss Link Info fra Alexa" med dine rum, de skulle gerne være en mulighed fra dropdown menuen ved at trykke på "+ add", tilføj alle dine rum og sæt den til "All Properties"<br>
+5. Deploy dit flow og opsæt Noden "Hent Danfoss Link Info fra Alexa" med dine rum, de skulle gerne være en mulighed fra dropdown menuen ved at trykke på "+ add", tilføj alle dine rum og sæt den til "All Properties"<br>
     Tilføj dem her: <a href="https://raw.githubusercontent.com/michaelflarsen/danfosslink-in-HA/main/haFejlVedHentInfo2.JPG">Opsæt Rum</a>
 
-8. Gå gennem flowet og ændre så den får dine Rum og Områder korrekt ind, kig efter * makering<br>
+6. Gå gennem flowet og ændre så den får dine Rum og Områder korrekt ind, kig efter * makering<br>
     Find dine rum her: <a href="https://raw.githubusercontent.com/michaelflarsen/danfosslink-in-HA/main/findRum.JPG">Find Rum</a><br>
 
