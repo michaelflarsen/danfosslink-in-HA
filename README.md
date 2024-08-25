@@ -14,6 +14,6 @@ Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home As
 3. Impoter flow fra denne fil: <a href="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/Node-Red%20Flow">Her fra</a><br>
     Tilføj det i din Node-Red installation
 
-4.  
+4. Gå gennem flow og ændre så den kan se dine Rum og Områder, kig efter ***** makering
 
 
