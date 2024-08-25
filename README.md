@@ -1,6 +1,6 @@
 # Danfoss Link CC In HomeAssistant <br>
 <img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfosslink.JPG" alt="Controller" width="500">
-Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home Assistant, med mulighed for at se & styre temperature via automatiseringer og evt se statiktik i Grafana!<br>
+Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home Assistant, med mulighed for at se & styre temperatur via automatiseringer og evt se statiktik i Grafana!<br>
 <img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/grafanaTemp.JPG" alt="Grafana" width="400">
 <img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/haKlima.JPG" alt="Grafana" width="300">
 <br>
