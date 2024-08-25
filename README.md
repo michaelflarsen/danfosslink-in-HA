@@ -7,6 +7,6 @@ How to get Danfoss Link in to Home Assistant!
 
 2. Din Node-Red installation skal indholde disse 2 paletter eller får du Røde kasser der viser fejl
     <br> node-red-contrib-home-assistant-websocket
-    node-red-contrib-alexa-remote2-applestrudel
+    <br> node-red-contrib-alexa-remote2-applestrudel
 
 **WIP**
