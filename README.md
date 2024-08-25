@@ -11,7 +11,7 @@ Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home As
     <br> node-red-contrib-home-assistant-websocket 
     <br> node-red-contrib-alexa-remote2-applestrudel
    
-3. Impoter flow fra denne fil: <a href="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/Node-Red%20Flow">Her fra</a>
+3. Impoter flow fra denne fil: <a href="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/Node-Red%20Flow">Her fra</a><br>
     Tilføj det i din Node-Red installation
 
 4.  
