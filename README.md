@@ -7,7 +7,7 @@ Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home As
 <i>Vi trækker info fra Danfoss Link igennem Alexa og til Node-Red, mange trin, mange fejl muligheder!!</i>
 <br><br>
 
-1. Tilføj din Danfoss Link CC til Alexa Appen, <i>kræver ingen Alexa Enheder, man må kun trække data ud af Alexa hvert 5 min</i>
+1. Tilføj din Danfoss Link CC til Alexa Appen, <i>kræver ingen Alexa Enheder,</i><br> man må kun trække data ud af Alexa hvert 5 min
     <br>Hjælp: <a href="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfossAlexaSetup.pdf">Her</a> 
 
 2. Din <b>Node-Red</b> installation skal indholde disse 2 paletter (alt+shift+p).
