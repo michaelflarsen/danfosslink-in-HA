@@ -14,7 +14,7 @@ Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home As
 3. Impoter flow fra denne fil: <a href="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/Node-Red%20Flow">Her fra</a><br>
     Tilføj det i din Node-Red installation
 
-4. Opsæt din Alexa web server under en enhed der har "Account missing!", den skal have din Node-Red's IP, og port 3456! <a href="https://raw.githubusercontent.com/michaelflarsen/danfosslink-in-HA/main/alexaServerIp.JPG">Sådan</a>
+4. Opsæt din Alexa web server under en enhed der har "Account missing!", den skal have din Node-Red's IP, og port 3456! <a href="https://raw.githubusercontent.com/michaelflarsen/danfosslink-in-HA/main/alexaServerIp.JPG">eksempel</a>
 6. Gå gennem flowet og ændre så den får dine Rum og Områder korrekt ind, kig efter * makering
 
 
