@@ -9,6 +9,8 @@ How to get Danfoss Link in to Home Assistant!
     <br> node-red-contrib-home-assistant-websocket 
     <br> node-red-contrib-alexa-remote2-applestrudel
    
-3. Impoter flow fra https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/Node-Red%20Flow
+3. Impoter flow fra <a href="[url](https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/Node-Red%20Flow)">Her fra</a>
+
+4. 
 
 **WIP**
