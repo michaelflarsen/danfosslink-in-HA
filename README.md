@@ -10,7 +10,7 @@ Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home As
 1. Tilføj din Danfoss Link CC til Alexa Appen, <i>kræver ingen Alexa Enheder!</i>
     <br>Hjælp: <a href="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfossAlexaSetup.pdf">Her</a> 
 
-2. Din <b>Node-Red</b> installation skal indholde disse 2 paletter (alt+shift+p) ellers får du fejl.
+2. Din <b>Node-Red</b> installation skal indholde disse 2 paletter (alt+shift+p).
     <br> node-red-contrib-home-assistant-websocket <a href="https://flows.nodered.org/node/node-red-contrib-home-assistant-websocket">Her fra</a>
     <br> node-red-contrib-alexa-remote2-applestrudel <a href="https://flows.nodered.org/node/node-red-contrib-alexa-remote2-applestrudel">Her fra</a>
    
