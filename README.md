@@ -1,7 +1,7 @@
 # Danfoss Link CC In HomeAssistant
 How to get Danfoss Link in to Home Assistant!<br>
-<img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfosslink.JPG" alt="Italian Trulli">
-
+<img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfosslink.JPG" alt="Controller">
+<img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfosslink2.JPG" alt="Termostat">
 
 1. Tilføj din Danfoss Link til Alexa.
     <br>Hjælp: <a href="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfossAlexaSetup.pdf">Her</a> 
