@@ -1,4 +1,4 @@
-# danfosslinkInHA
+# danfosslink In HomeAssistant
 How to get Danfoss Link in to Home Assistant!
 
 
