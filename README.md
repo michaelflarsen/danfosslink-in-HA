@@ -1,5 +1,5 @@
 # Danfoss Link CC In HomeAssistant
-How to get Danfoss Link in to Home Assistant!
+How to get Danfoss Link in to Home Assistant!<br>
 <img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfosslink.JPG" alt="Italian Trulli">
 
 
