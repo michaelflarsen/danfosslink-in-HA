@@ -4,7 +4,7 @@ Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home As
 <img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/grafanaTemp.JPG" alt="Grafana" width="400">
 <img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/haKlima.JPG" alt="Grafana" width="300">
 <br>
-<i>Note: Vi trækker info fra Danfoss Link igennem Alexa og vidrer til Node-Red, mange trin, mange fejl muligheder!</i>
+<i>Vi trækker info fra Danfoss Link igennem Alexa og til Node-Red, mange trin, mange fejl muligheder!!</i>
 <br><br>
 
 1. Tilføj din Danfoss Link til Alexa, <i>kræver ingen Alexa Enheder!</i>
