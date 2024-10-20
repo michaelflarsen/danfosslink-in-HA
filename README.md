@@ -23,6 +23,6 @@ Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home As
 5. Deploy dit flow og opsæt Noden "Hent Danfoss Link Info fra Alexa" med dine rum, de skulle gerne være en mulighed fra dropdown menuen ved at trykke på "+ add", tilføj alle dine rum og sæt den til "All Properties"<br>
     Tilføj dem her: <a href="https://raw.githubusercontent.com/michaelflarsen/danfosslink-in-HA/main/haFejlVedHentInfo2.JPG">Opsæt Rum</a>
 
-6. Gå gennem flowet og ændre dine til dine Rum og Områder, kig efter * makering<br>
+6. Gå gennem flowet og ændre dine Rum og Områder, kig efter * makering<br>
     Find dine rum her: <a href="https://raw.githubusercontent.com/michaelflarsen/danfosslink-in-HA/main/findRum.JPG">Find Rum</a><br>
 
