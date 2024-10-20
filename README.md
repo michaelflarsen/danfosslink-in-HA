@@ -26,4 +26,4 @@ Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home As
 6. Gå gennem flowet og ændre dine Rum og Områder, kig efter * makering<br>
     Find dine rum her: <a href="https://raw.githubusercontent.com/michaelflarsen/danfosslink-in-HA/main/findRum.JPG">Find Rum</a><br>
 
-Hvis du bruger min guide så lav en kommentar om det virker eller ej!
+Min første guide så smid en kommentar om hvad du tænker!
