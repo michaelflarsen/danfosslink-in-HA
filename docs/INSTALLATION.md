@@ -100,7 +100,7 @@ Hvis de er der = ✅ installation lykkedes!
 
 ### 3.1 - Forbered Flow-fil
 
-1. Find filen `flows/danfoss-link-integration.json` i projektet
+1. Find filen [flows/danfoss-link-integration.json](../flows/danfoss-link-integration.json) i projektet
 2. Åbn den i en teksteditor
 3. Kopier alt indholdet (Ctrl+A, Ctrl+C)
 
