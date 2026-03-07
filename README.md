@@ -91,7 +91,7 @@ Vil du:
 
 - **5 minutters polling** – Alexa tillader kun datahentning hvert 5. minut (realtidsdata ikke muligt)
 - **Cloudafhængighed** – Løsningen er afhængig af Amazons API
-- **8 rooms standard** – Default setup understøtter 8 rum (kan udvides, se [CONFIGURATION.md](docs/CONFIGURATION.md))
+- **Sensor-noder pre-konfigureret** – Flowet kommer med 8 sensor-noder som eksempel. Du får lige så mange data som du har rum i Alexa. Se [CONFIGURATION.md](docs/CONFIGURATION.md) for at tilføje flere sensor-noder hvis nødvendig
 
 ---
 
