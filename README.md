@@ -2,7 +2,7 @@
 
 Integrér dit **Danfoss Link CC** varmesystem i Home Assistant via Alexa og Node-RED – uden officiel API!
 
-<img src="danfosslink.JPG" alt="Danfoss Link CC Controller" width="500">
+<img src="assets/danfosslink.JPG" alt="Danfoss Link CC Controller" width="500">
 
 ---
 
@@ -57,7 +57,7 @@ Når det er sat op, kan du:
 
 1. **Tilslut Danfoss til Alexa** – Se [docs/SETUP_ALEXA.md](docs/SETUP_ALEXA.md)
 2. **Installer Node-RED paletter** – Se [docs/INSTALLATION.md](docs/INSTALLATION.md#trin-2--installer-node-red-paletter)
-3. **Importer flow** – Copy/paste fra `flows/danfoss-link-integration.json`
+3. **Importer flow** – Copy/paste fra [flows/danfoss-link-integration.json](flows/danfoss-link-integration.json)
 4. **Konfigurér rum** – Tilføj dine rum som beskrevet i guiden
 5. **Deploy og test** – Verificer at data kommer ind i Home Assistant
 
