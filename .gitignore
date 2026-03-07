@@ -1,0 +1,93 @@
+# .gitignore for Danfoss Link in Home Assistant Project
+
+# Node-RED
+node_modules/
+.node-red/
+flows_cred.json
+.flutterfire-cli-env.*
+
+# Home Assistant
+.storage/
+__pycache__/
+*.egg-info/
+.python-version
+
+# Python
+venv/
+env/
+*.pyc
+.pytest_cache/
+.coverage
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+logs/
+debug/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+
+# Credentials & Secrets
+secrets.yaml
+.env
+.env.local
+credentials/
+private/
+
+# Graphs & Reports
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.pdf
+!assets/**
+
+# Backup files
+*.backup
+*.backup.*
+backup/
+archives/
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Project specific
+config/local-*
+flows/backup/
+
+# Generated files
+*.min.js
+*.min.css
+.webpack/
+
+# Node-RED editor backups
+*.flows.json.bak
+.git-credentials
+
+---
+
+# Allow these exceptions
+!flows/danfoss-link-integration.json
+!assets/**
+!docs/**
+!config/example-**

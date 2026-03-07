@@ -1,0 +1,238 @@
+# Home Assistant Automation Examples
+
+Example automations to use with Danfoss Link CC integration.
+
+## Example 1: Temperature Alert
+
+Send notification if room temperature drops below threshold.
+
+```yaml
+automation:
+  - id: 'danfoss_low_temp_alert'
+    alias: 'Danfoss - Low Temperature Alert'
+    description: 'Alert when room temperature drops below 18°C'
+    
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.danfoss_stue  # Change to your room sensor
+      below: 18
+      for:
+        minutes: 5  # Only alert if below for 5 minutes
+    
+    action:
+      - service: notify.notify  # Or your preferred notification service
+        data:
+          title: '🌡️ Temperature Alert'
+          message: >
+            Stuen is {{ states('sensor.danfoss_stue') }}°C.
+            Setpoint: {{ states('sensor.danfoss_setpoint_stue') }}°C.
+```
+
+## Example 2: Temperature Report
+
+Send daily temperature summary at 8 AM.
+
+```yaml
+automation:
+  - id: 'danfoss_daily_report'
+    alias: 'Danfoss - Daily Temperature Report'
+    
+    trigger:
+      platform: time
+      at: '08:00:00'
+    
+    action:
+      - service: notify.notify
+        data:
+          title: '📊 Daily Temperature Report'
+          message: |
+            Stue: {{ states('sensor.danfoss_stue') }}°C (setpoint: {{ states('sensor.danfoss_setpoint_stue') }}°C)
+            Soveværelse: {{ states('sensor.danfoss_sovevaerelse') }}°C
+            Køkken: {{ states('sensor.danfoss_koekken') }}°C
+```
+
+## Example 3: Climate Control Automation
+
+Automatically manage heating based on temperature.
+
+```yaml
+automation:
+  - id: 'danfoss_auto_heating'
+    alias: 'Danfoss - Auto Heating'
+    description: 'Increase setpoint if temperature too low'
+    
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.danfoss_stue
+      below: 19
+      for:
+        minutes: 10
+    
+    condition:
+      - condition: time
+        after: '06:00:00'
+        before: '22:00:00'
+    
+    action:
+      - service: logbook.log
+        data:
+          name: 'Danfoss Auto Heating'
+          message: 'Temperature low - consider adjusting setpoint'
+```
+
+## Example 4: Morning Heating
+
+Increase temperature in morning while gradually cooling at night.
+
+```yaml
+automation:
+  - id: 'danfoss_circadian_heating'
+    alias: 'Danfoss - Circadian Heating'
+    
+    trigger:
+      - platform: time
+        at: '06:30:00'
+        id: 'morning'
+      - platform: time
+        at: '23:00:00'
+        id: 'evening'
+    
+    action:
+      - choose:
+        - conditions:
+            - condition: trigger
+              id: 'morning'
+          sequence:
+            - service: logbook.log
+              data:
+                name: 'Morning'
+                message: 'Consider raising temperature for morning comfort'
+        
+        - conditions:
+            - condition: trigger
+              id: 'evening'
+          sequence:
+            - service: logbook.log
+              data:
+                name: 'Evening'
+                message: 'Consider lowering temperature for night'
+```
+
+## Example 5: Debug Template Sensors
+
+Create debug sensors in Home Assistant to monitor integration.
+
+```yaml
+# Add to configuration.yaml or templates.yaml
+
+template:
+  - sensor:
+      - name: 'Danfoss Latest Update'
+        unique_id: 'danfoss_latest_update'
+        unit_of_measurement: 'minutes ago'
+        state: >
+          {% set last_update = state_attr('sensor.danfoss_stue', 'last_reset') %}
+          {% if last_update %}
+            {{ ((now().timestamp() - last_update | as_timestamp) / 60) | int }}
+          {% else %}
+            unknown
+          {% endif %}
+      
+      - name: 'Danfoss Stue Status'
+        unique_id: 'danfoss_stue_status'
+        state: >
+          {% set state = states('sensor.danfoss_stue') %}
+          {% if state == 'unavailable' %}
+            ❌ Offline
+          {% elif state == 'unknown' %}
+            ⚠️ Unknown
+          {% else %}
+            ✅ {{ state }}°C
+          {% endif %}
+```
+
+## Example 6: Statistics & History
+
+Gather statistics about temperature over time.
+
+```yaml
+# In configuration.yaml
+
+homeassistant:
+  customize:
+    sensor.danfoss_stue:
+      icon: mdi:thermometer
+      unit_of_measurement: '°C'
+      device_class: temperature
+    sensor.danfoss_setpoint_stue:
+      icon: mdi:target-temperature
+      unit_of_measurement: '°C'
+      device_class: temperature
+
+# Create min/max templates
+template:
+  - sensor:
+      - name: 'Danfoss Stue Min Today'
+        unique_id: 'danfoss_stue_min'
+        state: >
+          {% set temps = state_attr('sensor.danfoss_stue', 'history') | default([]) %}
+          {% if temps | length > 0 %}
+            {{ (temps | map(attribute='temperature') | list | min | default(0)) }}
+          {% else %}
+            --
+          {% endif %}
+```
+
+## Integration Tips
+
+### 1. Use Input Helpers for Manual Overrides
+
+```yaml
+input_number:
+  danfoss_override_setpoint:
+    name: 'Manual Setpoint Override'
+    unit_of_measurement: '°C'
+    min: 10
+    max: 30
+    step: 0.5
+    icon: mdi:thermometer
+```
+
+### 2. Create Groups for Easy Access
+
+```yaml
+group:
+  danfoss_temperatures:
+    name: 'Danfoss Rooms'
+    entities:
+      - sensor.danfoss_stue
+      - sensor.danfoss_soveværelse
+      - sensor.danfoss_køkken
+      - sensor.danfoss_gang
+```
+
+### 3. Use History Statistics for Trends
+
+```yaml
+sensor:
+  - platform: statistics
+    name: 'Danfoss Stue Average'
+    entity_id: sensor.danfoss_stue
+    sampling_size: 50
+    max_age:
+      hours: 24
+```
+
+## Testing Automations
+
+Before deploying:
+
+1. Go to **Developer Tools** → **Automations**
+2. Find your automation
+3. Click **Test** button
+4. Verify action executed correctly
+5. Check logs for any errors
+
+---
+
+**Last updated:** March 2026

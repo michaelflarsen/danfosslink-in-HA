@@ -1,29 +1,153 @@
-# Danfoss Link CC In HomeAssistant <br>
-<img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfosslink.JPG" alt="Controller" width="500">
-Følg disse trin hvis du vil have dit gamle Danfoss Link CC system ind i Home Assistant, med mulighed for at se & styre temperatur via automatiseringer og evt se statistik i Grafana!<br>
-<img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/grafanaTemp.JPG" alt="Grafana" width="400">
-<img src="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/haKlima.JPG" alt="Grafana" width="300">
-<br>
-<i>Vi trækker info fra Danfoss Link igennem Alexa og til Node-Red, mange trin, mange fejl muligheder!!</i>
-<br><br>
+# 🌡️ Danfoss Link CC → Home Assistant
 
-1. Tilføj din Danfoss Link CC til Alexa Appen, <i>kræver ingen Alexa Enheder</i><br>
-   Man må kun trække data ud af Alexa hvert 5 min!
-    <br>Hjælp: <a href="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/danfossAlexaSetup.pdf">Her</a> 
+Integrér dit **Danfoss Link CC** varmesystem i Home Assistant via Alexa og Node-RED – uden officiel API!
 
-2. Din <b>Node-Red</b> installation skal indholde disse 2 paletter (alt+shift+p).
-    <br> node-red-contrib-home-assistant-websocket <a href="https://flows.nodered.org/node/node-red-contrib-home-assistant-websocket">Her fra</a>
-    <br> node-red-contrib-alexa-remote2-applestrudel <a href="https://flows.nodered.org/node/node-red-contrib-alexa-remote2-applestrudel">Her fra</a>
-   
-3. Impoter flow fra denne fil: <a href="https://github.com/michaelflarsen/danfosslink-in-HA/blob/main/Node-Red%20Flow">Her fra</a><br>
-    Tilføj det i din Node-Red installation
-   
-4. Opsæt din Alexa web server under en enhed der har "Account missing!", den skal have din Node-Red's IP, og port 3456! <a href="https://raw.githubusercontent.com/michaelflarsen/danfosslink-in-HA/main/alexaServerIp.JPG">eksempel</a>
+<img src="assets/danfosslink.JPG" alt="Danfoss Link CC Controller" width="500">
 
-5. Deploy dit flow og opsæt Noden "Hent Danfoss Link Info fra Alexa" med dine rum, de skulle gerne være en mulighed fra dropdown menuen ved at trykke på "+ add", tilføj alle dine rum og sæt den til "All Properties"<br>
-    Tilføj dem her: <a href="https://raw.githubusercontent.com/michaelflarsen/danfosslink-in-HA/main/haFejlVedHentInfo2.JPG">Opsæt Rum</a>
+---
 
-6. Gå gennem flowet og ændre dine Rum og Områder, kig efter * makering<br>
-    Find dine rum her: <a href="https://raw.githubusercontent.com/michaelflarsen/danfosslink-in-HA/main/findRum.JPG">Find Rum</a><br>
+## 📋 Indhold
 
-Min første guide så smid en kommentar om hvad du tænker!
+- [Hvad gør dette?](#-hvad-gør-dette)
+- [Primær vejledning](#-primær-vejledning)
+  - [Krav](#✅-krav)
+  - [Installation](#🚀-installation)
+  - [Konfiguration](#⚙️-konfiguration)
+- [Dokumentation](#-dokumentation)
+- [Kendte begrænsninger](#-kendte-begrænsninger)
+- [Screenshots](#-screenshots)
+- [Bidrag & Support](#-bidrag--support)
+- [Licens](#-licens)
+
+---
+
+## 💡 Hvad gør dette?
+
+Dette projekt lader dig trække temperaturdata fra din **Danfoss Link CC controller** ind i Home Assistant – selvom Danfoss ikke tilbyder en officiel integration.
+
+**Datavej:**
+```
+Danfoss Link CC → Alexa → Node-RED → Home Assistant
+```
+
+Når det er sat op, kan du:
+- 📊 Se aktuel og ønsket temperatur pr. rum i HA
+- 🤖 Lave automatiseringer baseret på rumtemperatur
+- 📈 Vise historisk temperaturdata i Grafana
+- 🔄 Automatisk opdatering hvert 5. minut
+
+---
+
+## 📚 Primær vejledning
+
+### ✅ Krav
+
+| Komponent | Detaljer |
+|-----------|----------|
+| **Danfoss Link CC** | Tilsluttet til internet |
+| **Amazon Alexa app** | Gratis – ingen fysisk Alexa-enhed nødvendig |
+| **Home Assistant** | Installeret og kørende |
+| **Node-RED** | Installeret som HA addon eller standalone |
+
+**Node-RED paletter (skal installeres):**
+- [`node-red-contrib-home-assistant-websocket`](https://flows.nodered.org/node/node-red-contrib-home-assistant-websocket)
+- [`node-red-contrib-alexa-remote2-applestrudel`](https://flows.nodered.org/node/node-red-contrib-alexa-remote2-applestrudel)
+
+### 🚀 Installation (Hurtigguide)
+
+1. **Tilslut Danfoss til Alexa** – Se [docs/SETUP_ALEXA.md](docs/SETUP_ALEXA.md)
+2. **Installer Node-RED paletter** – Se [docs/INSTALLATION.md](docs/INSTALLATION.md#trin-2--installer-node-red-paletter)
+3. **Importer flow** – Copy/paste fra `flows/danfoss-link-integration.json`
+4. **Konfigurér rum** – Tilføj dine rum som beskrevet i guiden
+5. **Deploy og test** – Verificer at data kommer ind i Home Assistant
+
+👉 **Detaljeret vejledning:** Se [docs/INSTALLATION.md](docs/INSTALLATION.md)
+
+### ⚙️ Konfiguration
+
+Vil du:
+- ➕ Tilføje flere rooms (8+ rum)?
+- ⏱️ Ændre update-frekvens?
+- 📊 Sætte Grafana op?
+- 🔗 Lave Home Assistant automations?
+
+👉 Se [docs/CONFIGURATION.md](docs/CONFIGURATION.md)
+
+---
+
+## 📚 Dokumentation
+
+| Dokument | Indhold |
+|----------|---------|
+| [INSTALLATION.md](docs/INSTALLATION.md) | Trin-for-trin installationsvejledning |
+| [SETUP_ALEXA.md](docs/SETUP_ALEXA.md) | Opsætning af Alexa integration |
+| [CONFIGURATION.md](docs/CONFIGURATION.md) | Avanceret konfiguration & tilpasning |
+| [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Fejlfinding & løsninger |
+| [danfossAlexaSetup.pdf](docs/danfossAlexaSetup.pdf) | PDF vejledning til Alexa |
+
+---
+
+## ⚠️ Kendte begrænsninger
+
+- **5 minutters polling** – Alexa tillader kun datahentning hvert 5. minut (realtidsdata ikke muligt)
+- **Cloudafhængighed** – Løsningen er afhængig af Amazons API
+- **8 rooms standard** – Default setup understøtter 8 rum (kan udvides, se [CONFIGURATION.md](docs/CONFIGURATION.md))
+
+---
+
+## 📸 Screenshots
+
+| Home Assistant | Grafana |
+|----------------|---------|
+| <img src="assets/haKlima.JPG" width="300"> | <img src="assets/grafanaTemp.JPG" width="400"> |
+
+---
+
+## 📁 Projektstruktur
+
+```
+danfosslink-in-HA/
+├── README.md              ← Du er her
+├── CHANGELOG.md           ← Version history
+├── LICENSE                ← MIT License
+│
+├── flows/
+│   └── danfoss-link-integration.json    ← Node-RED flow
+│
+├── docs/
+│   ├── INSTALLATION.md    ← Detaljeret setup vejledning
+│   ├── SETUP_ALEXA.md     ← Alexa opsætning
+│   ├── CONFIGURATION.md   ← Avanceret konfiguration
+│   ├── TROUBLESHOOTING.md ← Fejlfinding
+│   └── danfossAlexaSetup.pdf
+│
+├── assets/
+│   ├── danfosslink.JPG
+│   ├── grafanaTemp.JPG
+│   ├── haKlima.JPG
+│   └── ...
+│
+└── config/
+    ├── example-ha-automation.yaml
+    └── example-grafana-dashboard.json
+```
+
+---
+
+## 🤝 Bidrag & Support
+
+Har du problemer eller forbedringer?
+
+1. **Læs først:** [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
+2. **Åbn issue:** [GitHub Issues](https://github.com/michaelflarsen/danfosslink-in-HA/issues)
+3. **Pull Request:** Er velkommen!
+
+---
+
+## 📜 Licens
+
+MIT License – se [LICENSE](LICENSE) fil for detaljer.
+
+---
+
+**Made with ❤️ for Home Assistant** • [GitHub](https://github.com/michaelflarsen/danfosslink-in-HA)
