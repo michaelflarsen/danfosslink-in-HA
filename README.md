@@ -2,7 +2,7 @@
 
 Integrér dit **Danfoss Link CC** varmesystem i Home Assistant via Alexa og Node-RED – uden officiel API!
 
-<img src="danfosslink.JPG" alt="Danfoss Link CC Controller" width="500">
+<img src="assets/danfosslink.JPG" alt="Danfoss Link CC Controller" width="500">
 
 ---
 
