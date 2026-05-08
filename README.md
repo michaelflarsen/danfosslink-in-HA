@@ -32,6 +32,7 @@ Danfoss Link CC → Alexa → Node-RED → Home Assistant
 
 Når det er sat op, kan du:
 - 📊 Se aktuel og ønsket temperatur pr. rum i HA
+- 🌡️ Styre setpoint (ønsket temperatur) direkte fra HA
 - 🤖 Lave automatiseringer baseret på rumtemperatur
 - 📈 Vise historisk temperaturdata i Grafana
 - 🔄 Automatisk opdatering hvert 5. minut
@@ -66,7 +67,9 @@ Når det er sat op, kan du:
 ### ⚙️ Konfiguration
 
 Vil du:
-- ➕ Tilføje flere rooms (8+ rum)?
+- 🌡️ Styre setpoint fra HA (skrive temperatur til Danfoss)?
+- 🏠 Oprette climate-entiteter med termostat-kort?
+- ➕ Tilføje flere rum (8+)?
 - ⏱️ Ændre update-frekvens?
 - 📊 Sætte Grafana op?
 - 🔗 Lave Home Assistant automations?
@@ -112,7 +115,8 @@ danfosslink-in-HA/
 ├── LICENSE                ← MIT License
 │
 ├── flows/
-│   └── danfoss-link-integration.json    ← Node-RED flow
+│   ├── danfoss-link-integration.json    ← Node-RED flow (læs data)
+│   └── danfoss-setpoint-control.json   ← Node-RED flow (skriv setpoint)
 │
 ├── docs/
 │   ├── INSTALLATION.md    ← Detaljeret setup vejledning

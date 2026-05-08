@@ -124,7 +124,7 @@ Løsninger til almindelige problemer.
 **Årsag 1:** Alexa credentials udløbet
 - Amazon kræver periodisk re-auth
 
-**Høsning:**
+**Løsning:**
 1. I Node-RED, find "Alexa-remote-init" node (gruppen øverst)
 2. Dobbelt-klik "Ny forspørgelse" inject node
 3. Klik "Inject" knap for at trigger ny auth
@@ -260,4 +260,4 @@ Som sidste udvej:
 
 ---
 
-**Last updated:** March 2026
+**Last updated:** May 2026

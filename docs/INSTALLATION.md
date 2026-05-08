@@ -109,7 +109,7 @@ Hvis de er der = ✅ installation lykkedes!
 1. Gå til Node-RED GUI
 2. Klik **☰ menu** → **"Import"**
 3. Vælg **"Clipboard"** eller paste direkte (Ctrl+V)
-4. Kly **"Import"** knappen
+4. Klik **"Import"** knappen
 5. Flowet skal nu vises på canvas'et
 
 ### 3.3 - Deploy
@@ -149,7 +149,7 @@ Hvis de er der = ✅ installation lykkedes!
 
 ### 4.3 - Tilpas sensor navne
 
-1. Tab højre side af flowet - du ser 8 "Rum" noder
+1. Se højre side af flowet - du ser 8 "Rum" noder
 2. For hver sensør du skal bruge:
    - Dobbelt-klik noden (f.eks. "Rum1")
    - Ret "Name" til f.eks. "Stue" (dit rum navn)
@@ -215,4 +215,4 @@ Nu har du en fungerende integration! 🎉
 ---
 
 **Got help from:** Michael F. Larsen  
-**Last updated:** March 2026
+**Last updated:** May 2026

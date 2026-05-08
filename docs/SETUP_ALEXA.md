@@ -185,4 +185,4 @@ Når Alexa integration virker:
 
 ---
 
-**Last updated:** March 2026
+**Last updated:** May 2026

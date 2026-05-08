@@ -10,11 +10,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- Support for setpoint control (currently read-only)
 - Docker compose setup for easier deployment
-- Automated flow export/import tools
 - Multi-language support (English, German, Swedish)
 - Web UI for configuration
+
+---
+
+## [1.3.0] - 2026-05-08
+
+### Added
+- ✅ Setpoint styring – skriv temperatur til Danfoss via Alexa
+  - Ny flow-fil: `flows/danfoss-setpoint-control.json`
+  - Understøtter op til 8 rum (skalerbar)
+  - Lytter på `input_number` entiteter i Home Assistant
+- 📖 Dokumentation til setpoint styring i `docs/CONFIGURATION.md`
+  - Metode 1: input_number + Node-RED (anbefalet)
+  - Metode 2: Template climate entity i HA
+  - Eksempel på automation der kobler climate → input_number
+
+### Fixed
+- Typos i `docs/INSTALLATION.md` (Kly → Klik, Tab → Se)
+- Typo i `docs/TROUBLESHOOTING.md` (Høsning → Løsning)
+- Forkerte sektionsnumre i `docs/CONFIGURATION.md` (5.x / 6.x → 1.x / 5.x)
+- Forældede labels "Onde:" og "Tonn:" i CONFIGURATION.md
+- InfluxDB v2 kompatibilitetsnotat tilføjet i Grafana-sektion
+- Opdateret alle "Last updated" datoer
+
+### Addresses
+- Issue #1: Dokumentation for setpoint-skrivning og climate entiteter
 
 ---
 
@@ -97,6 +120,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Date | Type | Status |
 |---------|------|------|--------|
+| 1.3.0 | 2026-05-08 | Release | ✅ Stable |
 | 1.2.0 | 2026-03-07 | Release | ✅ Stable |
 | 1.1.0 | 2026-02-15 | Release | ✅ Stable |
 | 1.0.0 | 2026-01-01 | Initial | ⚠️ Legacy |
@@ -104,6 +128,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## Upgrade Guide
+
+### From 1.2.0 to 1.3.0
+
+⚠️ **No breaking changes** - fuldt bagudkompatibel
+
+**Nye filer:**
+- `flows/danfoss-setpoint-control.json` – importer separat i Node-RED hvis du vil have setpoint-styring
+
+**Hvad skal du gøre:**
+1. Læs den nye sektion i `docs/CONFIGURATION.md` om setpoint styring
+2. Opret `input_number` hjælpere i HA (se guiden)
+3. Importer det nye flow i Node-RED
+4. Konfigurér dine rum i de nye noder
+
+---
 
 ### From 1.1.0 to 1.2.0
 
@@ -159,14 +198,13 @@ ls -la
 
 ⚠️ Please do NOT open public issues for security problems
 
-Instead, email: [maintainer-email]
+Instead, open a private GitHub issue or contact the maintainer directly.
 
 ---
 
 ## Future Roadmap
 
-### Planned for v1.3.0 (Q2 2026)
-- [ ] Setpoint control implementation
+### Planned for v1.4.0
 - [ ] Multi-user authentication
 - [ ] Advanced filtering & averaging
 - [ ] Custom alert rules
@@ -181,7 +219,7 @@ Instead, email: [maintainer-email]
 
 ## Contributing
 
-Contributions are welcome! See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines.
+Contributions are welcome! Åbn en Pull Request eller Issue på [GitHub](https://github.com/michaelflarsen/danfosslink-in-HA).
 
 ---
 
@@ -195,6 +233,6 @@ Contributions are welcome! See [CONTRIBUTING.md](../CONTRIBUTING.md) for guideli
 
 ---
 
-**Last updated:** March 2026  
+**Last updated:** May 2026  
 **Maintainer:** Michael F. Larsen  
 **Project:** Danfoss Link CC → Home Assistant Integration

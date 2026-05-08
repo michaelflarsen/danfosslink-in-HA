@@ -233,6 +233,80 @@ Before deploying:
 4. Verify action executed correctly
 5. Check logs for any errors
 
+## Example 7: Setpoint Styring via input_number
+
+Når du ændrer et `input_number` setpoint i HA, sender Node-RED det til Danfoss via Alexa.
+Opret `input_number` hjælpere i `configuration.yaml` – se `docs/CONFIGURATION.md`.
+
+```yaml
+# input_number definition (tilføj i configuration.yaml)
+input_number:
+  danfoss_setpoint_stue:
+    name: "Stue – Ønsket temperatur"
+    min: 5
+    max: 30
+    step: 0.5
+    unit_of_measurement: "°C"
+    icon: mdi:thermometer
+```
+
+## Example 8: Nat-sænkning via input_number
+
+Sænk automatisk setpoint om natten og hæv det igen om morgenen.
+
+```yaml
+automation:
+  - id: 'danfoss_night_setback'
+    alias: 'Danfoss - Nat-sænkning'
+    trigger:
+      - platform: time
+        at: '22:30:00'
+        id: 'nat'
+      - platform: time
+        at: '06:00:00'
+        id: 'morgen'
+    action:
+      - choose:
+          - conditions:
+              - condition: trigger
+                id: 'nat'
+            sequence:
+              - service: input_number.set_value
+                target:
+                  entity_id: input_number.danfoss_setpoint_stue
+                data:
+                  value: 18
+          - conditions:
+              - condition: trigger
+                id: 'morgen'
+            sequence:
+              - service: input_number.set_value
+                target:
+                  entity_id: input_number.danfoss_setpoint_stue
+                data:
+                  value: 22
+```
+
+## Example 9: Climate Entity kobler til Node-RED
+
+Når en HA climate entity skifter setpoint, kobles den til `input_number` som Node-RED lytter på.
+
+```yaml
+automation:
+  - id: 'danfoss_climate_sync'
+    alias: 'Danfoss - Climate → input_number'
+    trigger:
+      platform: state
+      entity_id: climate.stue
+      attribute: temperature
+    action:
+      service: input_number.set_value
+      target:
+        entity_id: input_number.danfoss_setpoint_stue
+      data:
+        value: "{{ state_attr('climate.stue', 'temperature') }}"
+```
+
 ---
 
-**Last updated:** March 2026
+**Last updated:** May 2026
